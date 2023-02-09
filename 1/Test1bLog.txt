@@ -1,0 +1,297 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "d1515f3c-25bd-4909-a9ca-b2d86ab7a0bd",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Please insert the size of input (Layer 0) : 3\n",
+      "Please insert the size of output (Layer 0) : 4\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\n",
+      "A priori conditions:\n",
+      "------------------------------\n",
+      "The output from linear model is correct\n",
+      "------------------------------\n",
+      "The output from ReLU is correct\n",
+      "------------------------------\n",
+      "The output from convex combination is correct\n",
+      "\n",
+      "Model parameters:\n",
+      "------------------------------\n",
+      "The x (data):  tensor([0.0290, 0.4019, 0.2598])\n",
+      "------------------------------\n",
+      "The w (weight):  tensor([[-0.1540, -0.5100,  0.2317],\n",
+      "        [-0.5175, -0.0368,  0.2007],\n",
+      "        [-0.1946,  0.3276,  0.0728],\n",
+      "        [ 0.3174,  0.3704, -0.2549]])\n",
+      "------------------------------\n",
+      "The b (bias):  tensor([ 0.2098, -0.2498,  0.1810, -0.3017])\n",
+      "\n",
+      "First level output:\n",
+      "------------------------------\n",
+      "The y_1 (output from lin. model): tensor([ 0.0606, -0.2274,  0.3259, -0.2098])\n",
+      "\n",
+      "Second level output:\n",
+      "------------------------------\n",
+      "The y_2 (output from ReLU): tensor([0.0606, 0.0000, 0.3259, 0.0000])\n",
+      "\n",
+      "Third level output:\n",
+      "------------------------------\n",
+      "The y_3 (output from convex combination): tensor([0.2879, 0.3000, 0.2348, 0.3000])\n",
+      "\n",
+      "----------------------------------------------------------------------------------------------------------------------\n",
+      "\n",
+      "My Neural Network is: input -> Layer 0 ->  output\n",
+      "\n"
+     ]
+    },
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Do you want to add a new Layer? (type y (yes) or n (no)?) y\n",
+      "Please insert the size of input (Layer 1) : 4\n",
+      "Please insert the size of output (Layer 1) : 3\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\n",
+      "A priori conditions:\n",
+      "------------------------------\n",
+      "The output from linear model is correct\n",
+      "------------------------------\n",
+      "The output from ReLU is correct\n",
+      "------------------------------\n",
+      "The output from convex combination is correct\n",
+      "\n",
+      "Model parameters:\n",
+      "------------------------------\n",
+      "The x (data):  tensor([0.2879, 0.3000, 0.2348, 0.3000])\n",
+      "------------------------------\n",
+      "The w (weight):  tensor([[ 0.2313,  0.1012, -0.1957, -0.2452],\n",
+      "        [ 0.1294,  0.4665,  0.2399, -0.0483],\n",
+      "        [-0.0243,  0.2842, -0.3475,  0.1662]])\n",
+      "------------------------------\n",
+      "The b (bias):  tensor([-0.1657,  0.2893, -0.1784])\n",
+      "\n",
+      "First level output:\n",
+      "------------------------------\n",
+      "The y_1 (output from lin. model): tensor([-0.1882,  0.5083, -0.1318])\n",
+      "\n",
+      "Second level output:\n",
+      "------------------------------\n",
+      "The y_2 (output from ReLU): tensor([0.0000, 0.5083, 0.0000])\n",
+      "\n",
+      "Third level output:\n",
+      "------------------------------\n",
+      "The y_3 (output from convex combination): tensor([0.3000, 0.1983, 0.3000])\n",
+      "\n",
+      "----------------------------------------------------------------------------------------------------------------------\n",
+      "\n",
+      "My Neural Network is: input -> Layer 0 -> Layer 1 ->  output\n",
+      "\n"
+     ]
+    },
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "Do you want to add a new Layer? (type y (yes) or n (no)?) n\n"
+     ]
+    }
+   ],
+   "source": [
+    "run main.py"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "0b3b201e-6f46-4cdb-be34-6f48f6524e9b",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "The U is: tensor([[2., 5., 8.],\n",
+      "        [6., 6., 7.],\n",
+      "        [1., 5., 2.],\n",
+      "        ...,\n",
+      "        [2., 1., 7.],\n",
+      "        [5., 1., 4.],\n",
+      "        [2., 1., 1.]])\n",
+      "\n",
+      "Each output is calculated in maximum 3 steps as follows:\n",
+      "\n",
+      "y0 = Ax + B\n",
+      "\n",
+      "y1 = ReLU(y0)\n",
+      "\n",
+      "y2 = (1 - y1)*f(x) + y1*g(x)\n",
+      "\n"
+     ]
+    },
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      "What output do you want to take for the tuning of parameters (type 0 (y0) or 1 (y1) or 2 (y2))?\n",
+      " 1\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\n",
+      "The error (every 250 steps):\n",
+      "tensor(7570378., grad_fn=<MseLossBackward0>)\n",
+      "tensor(5917722.5000, grad_fn=<MseLossBackward0>)\n",
+      "tensor(2754802.2500, grad_fn=<MseLossBackward0>)\n",
+      "tensor(2585478.5000, grad_fn=<MseLossBackward0>)\n",
+      "tensor(2450688.7500, grad_fn=<MseLossBackward0>)\n",
+      "tensor(2261362.7500, grad_fn=<MseLossBackward0>)\n",
+      "tensor(2018610., grad_fn=<MseLossBackward0>)\n",
+      "tensor(1747145., grad_fn=<MseLossBackward0>)\n",
+      "tensor(1479222.5000, grad_fn=<MseLossBackward0>)\n",
+      "tensor(1428672.3750, grad_fn=<MseLossBackward0>)\n",
+      "tensor(1273198.5000, grad_fn=<MseLossBackward0>)\n",
+      "tensor(1161388.5000, grad_fn=<MseLossBackward0>)\n",
+      "tensor(1055024.3750, grad_fn=<MseLossBackward0>)\n",
+      "tensor(1204205.6250, grad_fn=<MseLossBackward0>)\n",
+      "tensor(959130.6875, grad_fn=<MseLossBackward0>)\n",
+      "tensor(1014357.9375, grad_fn=<MseLossBackward0>)\n",
+      "tensor(917472.7500, grad_fn=<MseLossBackward0>)\n",
+      "tensor(806457., grad_fn=<MseLossBackward0>)\n",
+      "tensor(896414.8125, grad_fn=<MseLossBackward0>)\n",
+      "tensor(742265.4375, grad_fn=<MseLossBackward0>)\n",
+      "tensor(688071.0625, grad_fn=<MseLossBackward0>)\n",
+      "tensor(685133.7500, grad_fn=<MseLossBackward0>)\n",
+      "tensor(715608.6875, grad_fn=<MseLossBackward0>)\n",
+      "tensor(800482.1875, grad_fn=<MseLossBackward0>)\n",
+      "tensor(670356.2500, grad_fn=<MseLossBackward0>)\n",
+      "tensor(621069.6875, grad_fn=<MseLossBackward0>)\n",
+      "tensor(660642.8750, grad_fn=<MseLossBackward0>)\n",
+      "tensor(529564.8125, grad_fn=<MseLossBackward0>)\n",
+      "tensor(544515.6875, grad_fn=<MseLossBackward0>)\n",
+      "tensor(463649.5938, grad_fn=<MseLossBackward0>)\n",
+      "tensor(438384.1562, grad_fn=<MseLossBackward0>)\n",
+      "tensor(555299.5625, grad_fn=<MseLossBackward0>)\n",
+      "tensor(535212.0625, grad_fn=<MseLossBackward0>)\n",
+      "tensor(466247., grad_fn=<MseLossBackward0>)\n",
+      "tensor(354111.1250, grad_fn=<MseLossBackward0>)\n",
+      "tensor(496067.7500, grad_fn=<MseLossBackward0>)\n",
+      "tensor(336370.3125, grad_fn=<MseLossBackward0>)\n",
+      "tensor(298179.2188, grad_fn=<MseLossBackward0>)\n",
+      "tensor(390096.6250, grad_fn=<MseLossBackward0>)\n",
+      "tensor(297435.5000, grad_fn=<MseLossBackward0>)\n",
+      "tensor(244777.7344, grad_fn=<MseLossBackward0>)\n",
+      "tensor(238138.0312, grad_fn=<MseLossBackward0>)\n",
+      "tensor(243701.6250, grad_fn=<MseLossBackward0>)\n",
+      "tensor(262371.9688, grad_fn=<MseLossBackward0>)\n",
+      "tensor(290556.3438, grad_fn=<MseLossBackward0>)\n",
+      "tensor(297596.1875, grad_fn=<MseLossBackward0>)\n",
+      "tensor(293142.4062, grad_fn=<MseLossBackward0>)\n",
+      "tensor(299880.1875, grad_fn=<MseLossBackward0>)\n",
+      "tensor(226559.2812, grad_fn=<MseLossBackward0>)\n",
+      "tensor(197943.3594, grad_fn=<MseLossBackward0>)\n",
+      "tensor(195091.9844, grad_fn=<MseLossBackward0>)\n",
+      "tensor(201488.7656, grad_fn=<MseLossBackward0>)\n",
+      "tensor(220150.7656, grad_fn=<MseLossBackward0>)\n",
+      "tensor(251745.7500, grad_fn=<MseLossBackward0>)\n",
+      "tensor(275115.7812, grad_fn=<MseLossBackward0>)\n",
+      "tensor(269110.5000, grad_fn=<MseLossBackward0>)\n",
+      "tensor(215299.2656, grad_fn=<MseLossBackward0>)\n",
+      "tensor(173494.6562, grad_fn=<MseLossBackward0>)\n",
+      "tensor(268092.1250, grad_fn=<MseLossBackward0>)\n",
+      "tensor(220616.3906, grad_fn=<MseLossBackward0>)\n",
+      "tensor(223567.2969, grad_fn=<MseLossBackward0>)\n",
+      "tensor(217587.6719, grad_fn=<MseLossBackward0>)\n",
+      "tensor(216260.2500, grad_fn=<MseLossBackward0>)\n",
+      "tensor(214482.9219, grad_fn=<MseLossBackward0>)\n",
+      "tensor(222947.5156, grad_fn=<MseLossBackward0>)\n",
+      "tensor(196608.9531, grad_fn=<MseLossBackward0>)\n",
+      "tensor(184683.7344, grad_fn=<MseLossBackward0>)\n",
+      "tensor(202478.3594, grad_fn=<MseLossBackward0>)\n",
+      "tensor(217088.6875, grad_fn=<MseLossBackward0>)\n",
+      "tensor(246202.8438, grad_fn=<MseLossBackward0>)\n",
+      "tensor(229611.1719, grad_fn=<MseLossBackward0>)\n",
+      "tensor(191646.0781, grad_fn=<MseLossBackward0>)\n",
+      "tensor(280166.4375, grad_fn=<MseLossBackward0>)\n",
+      "tensor(189463.8281, grad_fn=<MseLossBackward0>)\n",
+      "tensor(234584.3125, grad_fn=<MseLossBackward0>)\n",
+      "tensor(267070.2812, grad_fn=<MseLossBackward0>)\n",
+      "tensor(234055.8281, grad_fn=<MseLossBackward0>)\n",
+      "tensor(218867.6094, grad_fn=<MseLossBackward0>)\n",
+      "tensor(209444.5469, grad_fn=<MseLossBackward0>)\n",
+      "tensor(234544.9531, grad_fn=<MseLossBackward0>)\n",
+      "\n",
+      "The output of the NN (post tuning) is:\n",
+      " tensor([[3.6430e+01, 3.8561e+01, 4.3631e+03],\n",
+      "        [3.3760e+01, 2.4225e+02, 7.5820e+02],\n",
+      "        [0.0000e+00, 0.0000e+00, 0.0000e+00],\n",
+      "        ...,\n",
+      "        [3.9665e+00, 2.7473e+00, 6.3289e+02],\n",
+      "        [0.0000e+00, 0.0000e+00, 0.0000e+00],\n",
+      "        [0.0000e+00, 0.0000e+00, 0.0000e+00]], grad_fn=<ReluBackward0>) \n",
+      " The target output (from measurements) is:\n",
+      " tensor([[7.3891e+00, 1.4841e+02, 2.9810e+03],\n",
+      "        [4.0343e+02, 4.0343e+02, 1.0966e+03],\n",
+      "        [2.7183e+00, 1.4841e+02, 7.3891e+00],\n",
+      "        ...,\n",
+      "        [7.3891e+00, 2.7183e+00, 1.0966e+03],\n",
+      "        [1.4841e+02, 2.7183e+00, 5.4598e+01],\n",
+      "        [7.3891e+00, 2.7183e+00, 2.7183e+00]])\n"
+     ]
+    }
+   ],
+   "source": [
+    "trainingNN(layer_list)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "b5d79e6a-3a20-43b2-b629-a3bc31c05ee7",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.13"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
